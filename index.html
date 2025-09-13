@@ -6,22 +6,102 @@
   <link rel="stylesheet" href="assets/css/style.css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
   <style>
-    /* Heart-shaped photo mask for memories gallery */
-    .heart-photo {
+    /* Heart-shaped gallery cards */
+    .gallery-flex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: center;
+    }
+    .gallery-card {
+      background: none;
+      box-shadow: none;
+      border: none;
+      width: 270px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 24px;
+    }
+    .heart-shape {
       width: 100%;
-      height: 180px;
-      object-fit: cover;
-      /* SVG heart mask */
-      -webkit-mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg"><path d="M10,30 A20,20 0 0,1 50,30 A20,20 0 0,1 90,30 Q90,60 50,90 Q10,60 10,30 Z" fill="white"/></svg>');
-      mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg"><path d="M10,30 A20,20 0 0,1 50,30 A20,20 0 0,1 90,30 Q90,60 50,90 Q10,60 10,30 Z" fill="white"/></svg>');
-      -webkit-mask-size: 100% 100%;
-      mask-size: 100% 100%;
-      -webkit-mask-repeat: no-repeat;
-      mask-repeat: no-repeat;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-bottom: 0;
+    }
+    .heart-shape-inner {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* Heart shape using clip-path */
+      clip-path: path('M 135 230 Q 135 110 250 110 Q 365 110 365 230 Q 365 340 250 410 Q 135 340 135 230 Z');
       background: #fff;
+      border: 5px solid #ffb6c1;
       box-shadow: 0 4px 18px #f8bbd0;
-      border-bottom: none;
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .heart-shape-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       display: block;
+    }
+    .gallery-card:hover .heart-shape-inner {
+      border-color: #d72660;
+      box-shadow: 0 8px 32px #f8bbd0;
+    }
+    .gallery-desc {
+      background: none;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 20px 14px 24px 14px;
+      text-align: center;
+      z-index: 2;
+      width: 100%;
+    }
+    .gallery-desc h3 {
+      margin: 0 0 8px 0;
+      color: #d72660;
+      font-size: 1.21rem;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+    .gallery-desc p {
+      margin: 0;
+      color: #a22e4b;
+      font-size: 1.03rem;
+    }
+    @media (max-width: 950px) {
+      .gallery-flex {
+        flex-direction: column;
+        align-items: center;
+      }
+      .gallery-card {
+        width: 93vw;
+        max-width: 330px;
+      }
+      .heart-shape, .heart-shape-inner {
+        width: 100%;
+        max-width: 330px;
+        aspect-ratio: 1 / 1;
+      }
+    }
+    /* Fallback for browsers without clip-path: path() support */
+    @supports not (clip-path: path('M 0 0')) {
+      .heart-shape-inner {
+        clip-path: polygon(
+          50% 80%, 90% 55%, 98% 22%, 78% 5%, 50% 20%, 22% 5%, 2% 22%, 10% 55%
+        );
+      }
     }
   </style>
 </head>
@@ -54,21 +134,33 @@
       <div class="section-title">Our Memories <span style="font-size:1.2em;">&#10084;&#65039;</span></div>
       <div class="gallery-flex">
         <div class="gallery-card">
-          <img src="assets/images/photo1.jpg" alt="First Date" class="heart-photo">
+          <div class="heart-shape">
+            <div class="heart-shape-inner">
+              <img src="assets/images/photo1.jpg" alt="First Date">
+            </div>
+          </div>
           <div class="gallery-desc">
             <h3>First Date</h3>
             <p>I knew from the first moment that you were special. Our first date is a memory I will always cherish.</p>
           </div>
         </div>
         <div class="gallery-card">
-          <img src="assets/images/photo2.jpg" alt="Beach Day" class="heart-photo">
+          <div class="heart-shape">
+            <div class="heart-shape-inner">
+              <img src="assets/images/photo2.jpg" alt="Beach Day">
+            </div>
+          </div>
           <div class="gallery-desc">
             <h3>Beach Day</h3>
             <p>Sunshine, laughter, and you by my side—what more could I ask for?</p>
           </div>
         </div>
         <div class="gallery-card">
-          <img src="assets/images/photo3.jpg" alt="Adventure Together" class="heart-photo">
+          <div class="heart-shape">
+            <div class="heart-shape-inner">
+              <img src="assets/images/photo3.jpg" alt="Adventure Together">
+            </div>
+          </div>
           <div class="gallery-desc">
             <h3>Adventure Together</h3>
             <p>Every adventure with you fills my heart with happiness and love.</p>
