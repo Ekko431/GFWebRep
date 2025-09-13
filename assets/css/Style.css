@@ -51,6 +51,7 @@ main {
   border-radius: 12px;
   margin: 0 0 0 0;
   flex-shrink: 0;
+  display: block;
 }
 .gallery-item .desc {
   padding: 1.5rem;
@@ -63,6 +64,7 @@ main {
 .gallery-item:nth-child(even) h2 {
   color: #1976d2;
 }
+/* Responsive styles for mobile */
 @media (max-width: 800px) {
   .gallery-item {
     flex-direction: column;
