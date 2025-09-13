@@ -4,23 +4,155 @@
   <meta charset="UTF-8">
   <title>About My Girlfriend</title>
   <link rel="stylesheet" href="assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
+  <style>
+    .book-container {
+      max-width: 520px;
+      margin: 60px auto;
+      background: #fff0f6;
+      border-radius: 26px;
+      box-shadow: 0 6px 40px #f8bbd0;
+      padding: 40px 20px 60px 20px;
+      position: relative;
+      min-height: 340px;
+    }
+    .book-page {
+      display: none;
+      animation: fadein 0.5s;
+    }
+    .book-page.active {
+      display: block;
+    }
+    .book-nav {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 36px;
+    }
+    .book-btn {
+      background: linear-gradient(90deg, #d72660 60%, #ffb6c1 100%);
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      padding: 12px 28px;
+      font-size: 1rem;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #f8bbd0;
+      transition: background 0.2s, transform 0.13s;
+    }
+    .book-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    @keyframes fadein {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .book-hearts {
+      font-size: 2rem;
+      text-align: center;
+      color: #d72660;
+      margin-bottom: 16px;
+      animation: heartbeat 1.2s infinite;
+    }
+    .book-photo {
+      display: block;
+      margin: 18px auto 12px auto;
+      border-radius: 50% 50% 46% 54% / 55% 60% 45% 40%;
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      box-shadow: 0 4px 18px #f8bbd0;
+      border: 4px solid #fff;
+      background: #fff;
+    }
+    .book-title {
+      color: #d72660;
+      font-size: 1.5rem;
+      text-align: center;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+    .book-text {
+      color: #a22e4b;
+      font-size: 1.1rem;
+      text-align: center;
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>About My Girlfriend</h1>
-    <nav>
-      <a href="index.html">Gallery</a>
-      <a href="about-girlfriend.html">About Girlfriend</a>
-      <a href="about-me.html">About Me</a>
-    </nav>
-  </header>
+  <nav class="main-nav">
+    <a href="index.html">Home</a>
+    <a href="about-girlfriend.html">About Girlfriend</a>
+    <a href="about-me.html">About Me</a>
+  </nav>
   <main>
-    <h2>Why She’s Special</h2>
-    <p>
-      She is kind, smart, and always makes me laugh. Her passion for life inspires me every day.
-      <br>
-      (Write more about her here!)
-    </p>
+    <div class="book-container">
+      <div class="book-page active">
+        <div class="book-hearts">&#10084;&#65039; Welcome to Our Love Story Book &#10084;&#65039;</div>
+        <img src="assets/images/gf1.jpg" alt="Your Girlfriend" class="book-photo">
+        <div class="book-title">Page 1: How We Met</div>
+        <div class="book-text">It all started with a smile that changed my world. From that moment, every day has felt like a new adventure.</div>
+      </div>
+      <div class="book-page">
+        <div class="book-hearts">&#10084;&#65039;</div>
+        <img src="assets/images/gf2.jpg" alt="Fun Together" class="book-photo">
+        <div class="book-title">Page 2: Why I Love Her</div>
+        <div class="book-text">Her kindness, her laughter, her beautiful heart. She inspires me to be my best self every day.</div>
+      </div>
+      <div class="book-page">
+        <div class="book-hearts">&#10084;&#65039;</div>
+        <img src="assets/images/gf3.jpg" alt="Adventure" class="book-photo">
+        <div class="book-title">Page 3: Favorite Memories</div>
+        <div class="book-text">From days at the beach, to late-night talks, to every little moment in between. I cherish them all.</div>
+      </div>
+      <div class="book-page">
+        <div class="book-hearts">&#10084;&#65039;</div>
+        <img src="assets/images/gf4.jpg" alt="Smiling" class="book-photo">
+        <div class="book-title">Page 4: Our Future</div>
+        <div class="book-text">With her, each tomorrow is brighter than the last. I can't wait for all that's yet to come, together.</div>
+      </div>
+      <div class="book-nav">
+        <button class="book-btn" id="prevBtn" disabled>&larr; Back</button>
+        <button class="book-btn" id="nextBtn">Next &rarr;</button>
+      </div>
+    </div>
   </main>
+  <footer>
+    <div class="hearts-footer">&#10084;&#65039; &#10084;&#65039; &#10084;&#65039;</div>
+    <p>&copy; 2025 Your Name. Made with <span class="footer-heart">&#10084;&#65039;</span> for my girlfriend.</p>
+  </footer>
+  <script>
+    // Book page navigation
+    const pages = document.querySelectorAll('.book-page');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    let currentPage = 0;
+    function showPage(i) {
+      pages.forEach((page, idx) => page.classList.toggle('active', idx === i));
+      prevBtn.disabled = i === 0;
+      nextBtn.disabled = i === pages.length - 1;
+    }
+    prevBtn.addEventListener('click', () => {
+      if (currentPage > 0) {
+        currentPage--;
+        showPage(currentPage);
+      }
+    });
+    nextBtn.addEventListener('click', () => {
+      if (currentPage < pages.length - 1) {
+        currentPage++;
+        showPage(currentPage);
+      }
+    });
+    // Optional: allow left/right arrow keys
+    document.addEventListener('keydown', e => {
+      if (e.key === "ArrowRight") nextBtn.click();
+      if (e.key === "ArrowLeft") prevBtn.click();
+    });
+  </script>
 </body>
 </html>
