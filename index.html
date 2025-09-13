@@ -3,15 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <title>My Girlfriend's Gallery</title>
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <h1>Welcome!</h1>
-  <p>This is a special website for my girlfriend.</p>
-  <nav>
-    <a href="index.html">Gallery</a> |
-    <a href="about-girlfriend.html">About Girlfriend</a> |
-    <a href="about-me.html">About Me</a>
-  </nav>
-  <!-- Gallery will go here -->
+  <header>
+    <h1>My Girlfriend's Gallery</h1>
+    <nav>
+      <a href="index.html">Gallery</a>
+      <a href="about-girlfriend.html">About Girlfriend</a>
+      <a href="about-me.html">About Me</a>
+    </nav>
+  </header>
+  <main>
+    <h2>Photo Gallery</h2>
+    <div class="gallery">
+      <div class="photo-card">
+        <img src="assets/images/photo1.jpg" alt="Girlfriend smiling" onclick="enlarge(this)">
+        <p>Her beautiful smile brightens my day.</p>
+      </div>
+      <div class="photo-card">
+        <img src="assets/images/photo2.jpg" alt="At the beach" onclick="enlarge(this)">
+        <p>Fun day at the beach together!</p>
+      </div>
+      <!-- Add more photo-card blocks as needed -->
+    </div>
+  </main>
+
+  <!-- The Modal for enlarged image -->
+  <div id="modal" class="modal" onclick="closeModal()">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modal-img">
+    <div id="caption"></div>
+  </div>
+  <script src="assets/js/gallery.js"></script>
 </body>
 </html>
