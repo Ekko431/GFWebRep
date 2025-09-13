@@ -2,43 +2,68 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>My Girlfriend's Story</title>
+  <title>My Love Story</title>
   <link rel="stylesheet" href="assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <h1>All About My Girlfriend</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about-girlfriend.html">About Girlfriend</a>
-      <a href="about-me.html">About Me</a>
-    </nav>
+  <header class="hero love-hero">
+    <div class="hero-content">
+      <div class="hearts">&#10084;&#65039; &#10084;&#65039; &#10084;&#65039;</div>
+      <h1>Our Love Story</h1>
+      <p class="hero-sub">Celebrating my amazing girlfriend and the love we share</p>
+      <a href="#gallery" class="cta-btn">View Memories</a>
+    </div>
   </header>
+  <nav class="main-nav">
+    <a href="index.html">Home</a>
+    <a href="about-girlfriend.html">About Girlfriend</a>
+    <a href="about-me.html">About Me</a>
+  </nav>
   <main>
-    <section class="scroll-gallery">
-      <div class="gallery-item">
-        <img src="assets/images/IMG_7141.jpg" alt="My Angel">
-        <div class="desc">
-          <h2>Her Beautiful Smile</h2>
-          <p>Her smile lights up every room she enters.</p>
-        </div>
+    <section class="info-section">
+      <div class="info-text">
+        <h2>Why I Love Her</h2>
+        <p>Her smile, her kindness, her laughter—she makes my world beautiful. Every moment with her feels like a new page in our love story. I am grateful for her every single day.</p>
+        <a href="about-girlfriend.html" class="cta-btn small">About Her</a>
       </div>
-      <div class="gallery-item">
-        <img src="assets/images/photo2.jpg" alt="At the Beach">
-        <div class="desc">
-          <h2>Fun at the Beach</h2>
-          <p>Memorable day by the ocean, laughing together in the sun.</p>
+      <img src="assets/images/photo1.jpg" alt="Girlfriend smiling" class="info-img heart-frame">
+    </section>
+    <section id="gallery" class="gallery-section">
+      <h2 class="section-title hearts">Our Memories &#10084;&#65039;</h2>
+      <div class="gallery-flex">
+        <div class="gallery-card heart-frame">
+          <img src="assets/images/photo2.jpg" alt="Fun day">
+          <div class="gallery-desc">
+            <h3>First Date</h3>
+            <p>I knew from the first moment that you were special. Our first date is a memory I will always cherish.</p>
+          </div>
         </div>
-      </div>
-      <div class="gallery-item">
-        <img src="assets/images/photo3.jpg" alt="Adventurous Day">
-        <div class="desc">
-          <h2>Adventures Together</h2>
-          <p>Exploring new places with her is always an adventure.</p>
+        <div class="gallery-card heart-frame">
+          <img src="assets/images/photo3.jpg" alt="At the beach">
+          <div class="gallery-desc">
+            <h3>Beach Day</h3>
+            <p>Sunshine, laughter, and you by my side—what more could I ask for?</p>
+          </div>
         </div>
+        <div class="gallery-card heart-frame">
+          <img src="assets/images/photo4.jpg" alt="Adventure">
+          <div class="gallery-desc">
+            <h3>Adventure Together</h3>
+            <p>Every adventure with you fills my heart with happiness and love.</p>
+          </div>
+        </div>
+        <!-- Add more gallery-card blocks as needed -->
       </div>
-      <!-- Add more .gallery-item sections as needed -->
+    </section>
+    <section class="cta-section">
+      <h2>Want to know who made this?</h2>
+      <a href="about-me.html" class="cta-btn">About Me</a>
     </section>
   </main>
+  <footer>
+    <div class="hearts-footer">&#10084;&#65039; &#10084;&#65039; &#10084;&#65039;</div>
+    <p>&copy; 2025 Your Name. Made with <span class="footer-heart">&#10084;&#65039;</span> for my girlfriend.</p>
+  </footer>
 </body>
 </html>
