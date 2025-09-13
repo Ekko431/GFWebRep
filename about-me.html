@@ -4,23 +4,90 @@
   <meta charset="UTF-8">
   <title>About Me</title>
   <link rel="stylesheet" href="assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
+  <style>
+    .aboutme-section {
+      max-width: 780px;
+      margin: 70px auto 50px auto;
+      background: linear-gradient(120deg, #fff0f6 70%, #ffe0ec 100%);
+      border-radius: 30px;
+      box-shadow: 0 8px 32px #f8bbd0;
+      padding: 54px 30px;
+      position: relative;
+      min-height: 320px;
+      text-align: center;
+    }
+    .aboutme-title {
+      color: #d72660;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      letter-spacing: 1px;
+    }
+    .aboutme-text {
+      color: #a22e4b;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      max-width: 520px;
+      margin: 0 auto 32px auto;
+      position: relative;
+      z-index: 1;
+    }
+    .aboutme-photos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+      margin-bottom: 0;
+      margin-top: 18px;
+    }
+    .aboutme-photo {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 2px 16px #f8bbd0;
+      border: 5px solid #fff0f5;
+      background: #fff;
+      margin: 0 8px;
+      transition: transform 0.18s;
+    }
+    .aboutme-photo:hover {
+      transform: scale(1.07) rotate(-5deg);
+      border-color: #d72660;
+    }
+    @media (max-width: 900px) {
+      .aboutme-section { padding: 32px 8px; }
+      .aboutme-photos { gap: 12px; }
+      .aboutme-photo { width: 65px; height: 65px; }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>About Me</h1>
-    <nav>
-      <a href="index.html">Gallery</a>
-      <a href="about-girlfriend.html">About Girlfriend</a>
-      <a href="about-me.html">About Me</a>
-    </nav>
-  </header>
+  <nav class="main-nav">
+    <a href="index.html">Home</a>
+    <a href="about-girlfriend.html">About Girlfriend</a>
+    <a href="about-me.html">About Me</a>
+  </nav>
   <main>
-    <h2>Hi, I'm [Your Name]</h2>
-    <p>
-      I made this website for my amazing girlfriend. I enjoy [hobbies/interests], and I love making her happy!
-      <br>
-      (Add more about yourself here!)
-    </p>
+    <section class="aboutme-section">
+      <div class="aboutme-title">About Me</div>
+      <div class="aboutme-text">
+        Hi! I'm [Your Name], a hopeless romantic and the luckiest person to have found my amazing girlfriend.
+        <br><br>
+        I love making memories, writing stories, and trying to bring a little more happiness into the world. You'll often find me exploring new places, taking photos, or just enjoying a cozy night in.
+      </div>
+      <div class="aboutme-photos">
+        <img src="assets/images/me1.jpg" alt="Me 1" class="aboutme-photo">
+        <img src="assets/images/me2.jpg" alt="Me 2" class="aboutme-photo">
+        <img src="assets/images/me3.jpg" alt="Me 3" class="aboutme-photo">
+        <img src="assets/images/me4.jpg" alt="Me 4" class="aboutme-photo">
+      </div>
+    </section>
   </main>
+  <footer>
+    <div class="hearts-footer">&#10084;&#65039; &#10084;&#65039; &#10084;&#65039;</div>
+    <p>&copy; 2025 Your Name. Made with <span class="footer-heart">&#10084;&#65039;</span> for my girlfriend.</p>
+  </footer>
 </body>
 </html>
