@@ -6,66 +6,40 @@
   <link rel="stylesheet" href="assets/css/style.css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
   <style>
-    /* Heart-shaped gallery cards */
+    /* Heart-shaped gallery cards using SVG */
     .gallery-flex {
       display: flex;
       flex-wrap: wrap;
       gap: 40px;
       justify-content: center;
     }
-    .gallery-card {
+    .gallery-card.heart-card {
       background: none;
       box-shadow: none;
       border: none;
-      width: 270px;
+      width: 230px;
       display: flex;
       flex-direction: column;
       align-items: center;
       position: relative;
-      z-index: 1;
       margin-bottom: 24px;
+      transition: transform 0.18s, box-shadow 0.18s;
     }
-    .heart-shape {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      margin-bottom: 0;
+    .gallery-card.heart-card:hover {
+      transform: translateY(-7px) scale(1.04);
     }
-    .heart-shape-inner {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      /* Heart shape using clip-path */
-      clip-path: path('M 135 230 Q 135 110 250 110 Q 365 110 365 230 Q 365 340 250 410 Q 135 340 135 230 Z');
-      background: #fff;
-      border: 5px solid #ffb6c1;
-      box-shadow: 0 4px 18px #f8bbd0;
-      overflow: hidden;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .heart-shape-inner img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .heart-svg {
+      width: 200px;
+      height: 180px;
       display: block;
-    }
-    .gallery-card:hover .heart-shape-inner {
-      border-color: #d72660;
-      box-shadow: 0 8px 32px #f8bbd0;
+      margin: 0 auto 0.6em auto;
     }
     .gallery-desc {
       background: none;
       border-radius: 0;
       box-shadow: none;
-      padding: 20px 14px 24px 14px;
+      padding: 0 10px 0 10px;
       text-align: center;
-      z-index: 2;
       width: 100%;
     }
     .gallery-desc h3 {
@@ -85,22 +59,14 @@
         flex-direction: column;
         align-items: center;
       }
-      .gallery-card {
-        width: 93vw;
-        max-width: 330px;
+      .gallery-card.heart-card {
+        width: 90vw;
+        max-width: 290px;
       }
-      .heart-shape, .heart-shape-inner {
-        width: 100%;
-        max-width: 330px;
-        aspect-ratio: 1 / 1;
-      }
-    }
-    /* Fallback for browsers without clip-path: path() support */
-    @supports not (clip-path: path('M 0 0')) {
-      .heart-shape-inner {
-        clip-path: polygon(
-          50% 80%, 90% 55%, 98% 22%, 78% 5%, 50% 20%, 22% 5%, 2% 22%, 10% 55%
-        );
+      .heart-svg {
+        width: 90vw;
+        max-width: 200px;
+        height: auto;
       }
     }
   </style>
@@ -133,34 +99,97 @@
     <section class="gallery-section">
       <div class="section-title">Our Memories <span style="font-size:1.2em;">&#10084;&#65039;</span></div>
       <div class="gallery-flex">
-        <div class="gallery-card">
-          <div class="heart-shape">
-            <div class="heart-shape-inner">
-              <img src="assets/images/photo1.jpg" alt="First Date">
-            </div>
-          </div>
+        <!-- Card 1 -->
+        <div class="gallery-card heart-card">
+          <svg viewBox="0 0 200 180" class="heart-svg">
+            <defs>
+              <clipPath id="heart-shape1">
+                <path d="M100 170
+                  Q30 110 30 60
+                  Q30 20 70 20
+                  Q100 20 100 45
+                  Q100 20 130 20
+                  Q170 20 170 60
+                  Q170 110 100 170Z"/>
+              </clipPath>
+              <filter id="shadow1" x="-40%" y="-40%" width="180%" height="180%">
+                <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#f8bbd0"/>
+              </filter>
+            </defs>
+            <image href="assets/images/photo1.jpg" width="200" height="180" clip-path="url(#heart-shape1)" preserveAspectRatio="xMidYMid slice"/>
+            <path d="M100 170
+              Q30 110 30 60
+              Q30 20 70 20
+              Q100 20 100 45
+              Q100 20 130 20
+              Q170 20 170 60
+              Q170 110 100 170Z"
+              fill="none" stroke="#ffb6c1" stroke-width="6" filter="url(#shadow1)"/>
+          </svg>
           <div class="gallery-desc">
             <h3>First Date</h3>
             <p>I knew from the first moment that you were special. Our first date is a memory I will always cherish.</p>
           </div>
         </div>
-        <div class="gallery-card">
-          <div class="heart-shape">
-            <div class="heart-shape-inner">
-              <img src="assets/images/photo2.jpg" alt="Beach Day">
-            </div>
-          </div>
+        <!-- Card 2 -->
+        <div class="gallery-card heart-card">
+          <svg viewBox="0 0 200 180" class="heart-svg">
+            <defs>
+              <clipPath id="heart-shape2">
+                <path d="M100 170
+                  Q30 110 30 60
+                  Q30 20 70 20
+                  Q100 20 100 45
+                  Q100 20 130 20
+                  Q170 20 170 60
+                  Q170 110 100 170Z"/>
+              </clipPath>
+              <filter id="shadow2" x="-40%" y="-40%" width="180%" height="180%">
+                <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#f8bbd0"/>
+              </filter>
+            </defs>
+            <image href="assets/images/photo2.jpg" width="200" height="180" clip-path="url(#heart-shape2)" preserveAspectRatio="xMidYMid slice"/>
+            <path d="M100 170
+              Q30 110 30 60
+              Q30 20 70 20
+              Q100 20 100 45
+              Q100 20 130 20
+              Q170 20 170 60
+              Q170 110 100 170Z"
+              fill="none" stroke="#ffb6c1" stroke-width="6" filter="url(#shadow2)"/>
+          </svg>
           <div class="gallery-desc">
             <h3>Beach Day</h3>
             <p>Sunshine, laughter, and you by my side—what more could I ask for?</p>
           </div>
         </div>
-        <div class="gallery-card">
-          <div class="heart-shape">
-            <div class="heart-shape-inner">
-              <img src="assets/images/photo3.jpg" alt="Adventure Together">
-            </div>
-          </div>
+        <!-- Card 3 -->
+        <div class="gallery-card heart-card">
+          <svg viewBox="0 0 200 180" class="heart-svg">
+            <defs>
+              <clipPath id="heart-shape3">
+                <path d="M100 170
+                  Q30 110 30 60
+                  Q30 20 70 20
+                  Q100 20 100 45
+                  Q100 20 130 20
+                  Q170 20 170 60
+                  Q170 110 100 170Z"/>
+              </clipPath>
+              <filter id="shadow3" x="-40%" y="-40%" width="180%" height="180%">
+                <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#f8bbd0"/>
+              </filter>
+            </defs>
+            <image href="assets/images/photo3.jpg" width="200" height="180" clip-path="url(#heart-shape3)" preserveAspectRatio="xMidYMid slice"/>
+            <path d="M100 170
+              Q30 110 30 60
+              Q30 20 70 20
+              Q100 20 100 45
+              Q100 20 130 20
+              Q170 20 170 60
+              Q170 110 100 170Z"
+              fill="none" stroke="#ffb6c1" stroke-width="6" filter="url(#shadow3)"/>
+          </svg>
           <div class="gallery-desc">
             <h3>Adventure Together</h3>
             <p>Every adventure with you fills my heart with happiness and love.</p>
