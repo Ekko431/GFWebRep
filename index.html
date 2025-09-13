@@ -2,63 +2,84 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>My Love Story</title>
+  <title>Our Love Story</title>
   <link rel="stylesheet" href="assets/css/style.css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
+  <style>
+    /* Heart-shaped photo mask for memories gallery */
+    .heart-photo {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      /* SVG heart mask */
+      -webkit-mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg"><path d="M10,30 A20,20 0 0,1 50,30 A20,20 0 0,1 90,30 Q90,60 50,90 Q10,60 10,30 Z" fill="white"/></svg>');
+      mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg"><path d="M10,30 A20,20 0 0,1 50,30 A20,20 0 0,1 90,30 Q90,60 50,90 Q10,60 10,30 Z" fill="white"/></svg>');
+      -webkit-mask-size: 100% 100%;
+      mask-size: 100% 100%;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      background: #fff;
+      box-shadow: 0 4px 18px #f8bbd0;
+      border-bottom: none;
+      display: block;
+    }
+  </style>
 </head>
 <body>
-  <header class="hero love-hero">
-    <div class="hero-content">
-      <div class="hearts">&#10084;&#65039; &#10084;&#65039; &#10084;&#65039;</div>
-      <h1>Our Love Story</h1>
-      <p class="hero-sub">Celebrating my amazing girlfriend and the love we share</p>
-      <a href="#gallery" class="cta-btn">View Memories</a>
-    </div>
-  </header>
   <nav class="main-nav">
     <a href="index.html">Home</a>
     <a href="about-girlfriend.html">About Girlfriend</a>
     <a href="about-me.html">About Me</a>
   </nav>
   <main>
+    <section class="hero love-hero">
+      <div class="hero-content">
+        <div class="hearts">&#10084;&#65039; &#10084;&#65039; &#10084;&#65039;</div>
+        <h1>Our Love Story</h1>
+        <div class="hero-sub">A journey of memories, love, and laughter</div>
+        <a href="about-girlfriend.html" class="cta-btn">About My Girlfriend</a>
+      </div>
+    </section>
+
     <section class="info-section">
       <div class="info-text">
-        <h2>Why I Love Her</h2>
-        <p>Her smile, her kindness, her laughter—she makes my world beautiful. Every moment with her feels like a new page in our love story. I am grateful for her every single day.</p>
-        <a href="about-girlfriend.html" class="cta-btn small">About Her</a>
+        <h2>How We Met</h2>
+        <p>It all started with a smile that changed my world. From that moment, every day has felt like a new adventure.</p>
+        <a href="about-me.html" class="cta-btn small">About Me</a>
       </div>
-      <img src="assets/images/photo1.jpg" alt="Girlfriend smiling" class="info-img heart-frame">
+      <img src="assets/images/photo1.jpg" alt="Us Together" class="info-img heart-frame">
     </section>
-    <section id="gallery" class="gallery-section">
-      <h2 class="section-title hearts">Our Memories &#10084;&#65039;</h2>
+
+    <section class="gallery-section">
+      <div class="section-title">Our Memories <span style="font-size:1.2em;">&#10084;&#65039;</span></div>
       <div class="gallery-flex">
-        <div class="gallery-card heart-frame">
-          <img src="assets/images/photo2.jpg" alt="Fun day">
+        <div class="gallery-card">
+          <img src="assets/images/photo1.jpg" alt="First Date" class="heart-photo">
           <div class="gallery-desc">
             <h3>First Date</h3>
             <p>I knew from the first moment that you were special. Our first date is a memory I will always cherish.</p>
           </div>
         </div>
-        <div class="gallery-card heart-frame">
-          <img src="assets/images/photo3.jpg" alt="At the beach">
+        <div class="gallery-card">
+          <img src="assets/images/photo2.jpg" alt="Beach Day" class="heart-photo">
           <div class="gallery-desc">
             <h3>Beach Day</h3>
             <p>Sunshine, laughter, and you by my side—what more could I ask for?</p>
           </div>
         </div>
-        <div class="gallery-card heart-frame">
-          <img src="assets/images/photo4.jpg" alt="Adventure">
+        <div class="gallery-card">
+          <img src="assets/images/photo3.jpg" alt="Adventure Together" class="heart-photo">
           <div class="gallery-desc">
             <h3>Adventure Together</h3>
             <p>Every adventure with you fills my heart with happiness and love.</p>
           </div>
         </div>
-        <!-- Add more gallery-card blocks as needed -->
       </div>
     </section>
+
     <section class="cta-section">
-      <h2>Want to know who made this?</h2>
-      <a href="about-me.html" class="cta-btn">About Me</a>
+      <h2>Here's to Many More Memories Together!</h2>
+      <a href="about-girlfriend.html" class="cta-btn">Read Our Book</a>
     </section>
   </main>
   <footer>
