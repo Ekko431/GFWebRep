@@ -2,39 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>My Girlfriend's Gallery</title>
+  <title>My Girlfriend's Story</title>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
   <header>
-    <h1>My Girlfriend's Gallery</h1>
+    <h1>All About My Girlfriend</h1>
     <nav>
-      <a href="index.html">Gallery</a>
+      <a href="index.html">Home</a>
       <a href="about-girlfriend.html">About Girlfriend</a>
       <a href="about-me.html">About Me</a>
     </nav>
   </header>
   <main>
-    <h2>Photo Gallery</h2>
-    <div class="gallery">
-      <div class="photo-card">
-        <img src="assets/images/photo1.jpg" alt="Girlfriend smiling" onclick="enlarge(this)">
-        <p>Her beautiful smile brightens my day.</p>
+    <section class="scroll-gallery">
+      <div class="gallery-item">
+        <img src="assets/images/photo1.jpg" alt="Smiling Girlfriend">
+        <div class="desc">
+          <h2>Her Beautiful Smile</h2>
+          <p>Her smile lights up every room she enters.</p>
+        </div>
       </div>
-      <div class="photo-card">
-        <img src="assets/images/photo2.jpg" alt="At the beach" onclick="enlarge(this)">
-        <p>Fun day at the beach together!</p>
+      <div class="gallery-item">
+        <img src="assets/images/photo2.jpg" alt="At the Beach">
+        <div class="desc">
+          <h2>Fun at the Beach</h2>
+          <p>Memorable day by the ocean, laughing together in the sun.</p>
+        </div>
       </div>
-      <!-- Add more photo-card blocks as needed -->
-    </div>
+      <div class="gallery-item">
+        <img src="assets/images/photo3.jpg" alt="Adventurous Day">
+        <div class="desc">
+          <h2>Adventures Together</h2>
+          <p>Exploring new places with her is always an adventure.</p>
+        </div>
+      </div>
+      <!-- Add more .gallery-item sections as needed -->
+    </section>
   </main>
-
-  <!-- The Modal for enlarged image -->
-  <div id="modal" class="modal" onclick="closeModal()">
-    <span class="close">&times;</span>
-    <img class="modal-content" id="modal-img">
-    <div id="caption"></div>
-  </div>
-  <script src="assets/js/gallery.js"></script>
 </body>
 </html>
