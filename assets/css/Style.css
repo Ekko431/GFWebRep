@@ -19,74 +19,64 @@ nav a:hover {
   text-decoration: underline;
 }
 main {
-  max-width: 800px;
+  max-width: 700px;
   margin: 2rem auto;
   padding: 1rem;
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 0 10px #e0e0e0;
 }
-.gallery {
+.scroll-gallery {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  justify-content: center;
+  flex-direction: column;
+  gap: 2.5rem;
 }
-.photo-card {
-  background: #fff0f6;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px #ddd;
-  padding: 1rem;
-  text-align: center;
-  width: 220px;
-}
-.photo-card img {
-  width: 180px;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-.photo-card img:hover {
-  transform: scale(1.05);
-}
-.photo-card p {
-  margin-top: 0.5rem;
-  font-size: 1rem;
-}
-
-/* Modal styling */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 10;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.8);
-  justify-content: center;
+.gallery-item {
+  display: flex;
+  flex-direction: row;
   align-items: center;
+  background: #fff0f6;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px #ddd;
+  overflow: hidden;
 }
-.modal-content {
-  margin: auto;
-  display: block;
-  max-width: 80vw;
-  max-height: 80vh;
-  border-radius: 10px;
-  box-shadow: 0 0 20px #111;
+.gallery-item:nth-child(even) {
+  flex-direction: row-reverse;
+  background: #e3f2fd;
 }
-.close {
-  position: absolute;
-  top: 30px;
-  right: 50px;
-  color: #fff;
-  font-size: 2rem;
-  font-weight: bold;
-  cursor: pointer;
+.gallery-item img {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin: 0 0 0 0;
+  flex-shrink: 0;
 }
-#caption {
-  color: #fff;
-  text-align: center;
-  padding-top: 10px;
-  font-size: 1.2rem;
+.gallery-item .desc {
+  padding: 1.5rem;
+  flex: 1;
+}
+.gallery-item h2 {
+  margin-top: 0;
+  color: #c2185b;
+}
+.gallery-item:nth-child(even) h2 {
+  color: #1976d2;
+}
+@media (max-width: 800px) {
+  .gallery-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .gallery-item:nth-child(even) {
+    flex-direction: column;
+  }
+  .gallery-item img {
+    width: 100%;
+    height: 200px;
+    border-radius: 12px 12px 0 0;
+  }
+  .gallery-item .desc {
+    padding: 1rem;
+  }
 }
