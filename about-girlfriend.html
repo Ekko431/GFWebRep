@@ -1,20 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>About My Girlfriend</title>
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About My Girlfriend – Our Love Story Book</title>
+  <!-- All-in-one CSS: your style-hero.css plus book/heart improvements -->
   <style>
     body {
+      margin: 0;
+      font-family: 'Montserrat', Arial, sans-serif;
       background: linear-gradient(135deg, #ffe0ec 0%, #fff5f8 100%);
+      color: #511c29;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
+
+    /* --- NAVIGATION --- */
+    .main-nav {
+      background: #fff;
+      box-shadow: 0 2px 8px #f8bbd0;
+      display: flex;
+      justify-content: center;
+      padding: 12px 0;
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      border-bottom-left-radius: 24px;
+      border-bottom-right-radius: 24px;
+    }
+    .main-nav a {
+      margin: 0 22px;
+      color: #d72660;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.07rem;
+      transition: color 0.2s;
+      letter-spacing: 0.03em;
+      position: relative;
+    }
+    .main-nav a:after {
+      content: "";
+      display: block;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #d72660 60%, #ffb6c1 100%);
+      transition: width 0.25s;
+      border-radius: 2px;
+      margin: 0 auto;
+    }
+    .main-nav a:hover:after,
+    .main-nav a:focus:after {
+      width: 100%;
+    }
+    .main-nav a:hover {
+      color: #b91345;
+    }
+    .main-nav a.active {
+      color: #b91345;
+      text-decoration: underline;
+    }
+
+    /* --- BOOK PAGE (About Girlfriend) --- */
     .book-wrapper {
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 80vh;
       margin-top: 40px;
+      margin-bottom: 60px;
     }
     .book {
       position: relative;
@@ -46,22 +99,68 @@
       border-radius: 16px;
       box-shadow: 0 2px 18px #f8bbd0;
       overflow: hidden;
-      transform-origin: left center;
-      transition: transform 0.7s cubic-bezier(0.87, -0.41, 0.19, 1.44), z-index 0.7s;
       z-index: 1;
-      backface-visibility: hidden;
       padding: 60px 48px 60px 64px;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: center;
       font-family: 'Montserrat', Arial, sans-serif;
+      transition: box-shadow 0.3s;
     }
-    .book-page .book-hearts {
+    /* Layered page effects for book realism */
+    .book-page.layer1 {
+      left: 10px;
+      top: 12px;
+      background: #fff6fa;
+      z-index: 0;
+      opacity: 0.7;
+      filter: blur(0.5px);
+      box-shadow: 0 8px 24px #f8bbd0;
+    }
+    .book-page.layer2 {
+      left: 20px;
+      top: 22px;
+      background: #ffeeef;
+      z-index: 0;
+      opacity: 0.45;
+      filter: blur(0.7px);
+      box-shadow: 0 12px 36px #f8bbd0;
+    }
+    .book-page.content {
+      z-index: 2;
+      background: #fff;
+      box-shadow: 0 8px 28px #e9407265, 0 0 0 2px #fff;
+    }
+    /* Book shadow for more realism */
+    .book::after {
+      content: "";
+      position: absolute;
+      left: 25px;
+      bottom: -18px;
+      width: 88%;
+      height: 24px;
+      background: radial-gradient(ellipse at center, #f8bbd0 40%, #fff0f5 100%);
+      z-index: 0;
+      border-radius: 40px;
+      opacity: 0.24;
+      filter: blur(2px);
+      pointer-events: none;
+    }
+
+    .book-hearts {
       font-size: 2rem;
       color: #d72660;
       text-align: center;
       margin-bottom: 10px;
       animation: heartbeat 1.2s infinite;
+    }
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      20% { transform: scale(1.15); }
+      40% { transform: scale(0.97); }
+      60% { transform: scale(1.05); }
+      80% { transform: scale(0.93); }
     }
     .book-page h2 {
       color: #d72660;
@@ -70,18 +169,32 @@
       text-align: center;
       letter-spacing: 1px;
     }
-    .book-page .book-photo {
+    .book-photo {
       margin: 0 auto 18px auto;
       width: 120px;
-      height: 120px;
+      height: 110px;
       object-fit: cover;
-      border-radius: 50% 50% 50% 50%/60% 60% 40% 40%;
-      box-shadow: 0 4px 18px #f8bbd0;
-      border: 4px solid #fff;
+      border: 3px solid #fff;
       display: block;
       background: #fff;
+      box-shadow: 0 4px 18px #f8bbd0;
+      /* Heart shape using CSS path if supported */
+      clip-path: path('M60 110 Q0 60 30 30 Q60 0 90 30 Q120 60 60 110 Z');
     }
-    .book-page .book-text {
+    /* Fallback for browsers that don't support path() */
+    @supports not (clip-path: path('')) {
+      .book-photo {
+        clip-path: polygon(
+          50% 80%,
+          0% 40%,
+          20% 10%,
+          50% 25%,
+          80% 10%,
+          100% 40%
+        );
+      }
+    }
+    .book-text {
       color: #a22e4b;
       font-size: 1.07rem;
       text-align: center;
@@ -89,7 +202,7 @@
       margin-bottom: 8px;
       margin-top: 6px;
     }
-    .book-page .book-pagenum {
+    .book-pagenum {
       position: absolute;
       font-size: 1rem;
       color: #f8bbd0;
@@ -99,50 +212,34 @@
       letter-spacing: 0.15em;
       font-family: monospace;
     }
-    /* Flipped page effect */
-    .book-page.flipped {
-      transform: rotateY(-180deg);
-      z-index: 0;
-      transition-delay: 0.07s;
-    }
-    .book-page.active {
-      z-index: 3;
-    }
-    /* Navigation */
-    .book-nav-btn {
-      position: absolute;
-      top: 50%;
-      width: 44px;
-      height: 44px;
-      background: linear-gradient(90deg, #d72660 60%, #ffb6c1 100%);
+
+    /* --- FOOTER --- */
+    footer {
+      background: linear-gradient(90deg, #d72660 70%, #ffb6c1 100%);
       color: #fff;
-      border: none;
-      border-radius: 50%;
-      box-shadow: 0 2px 8px #f8bbd0;
-      cursor: pointer;
-      font-size: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      outline: none;
-      z-index: 11;
-      transform: translateY(-50%);
-      transition: background 0.2s, transform 0.13s;
-      opacity: 0.92;
+      text-align: center;
+      padding: 24px 8px 14px 8px;
+      font-size: 1rem;
+      letter-spacing: 0.01em;
+      margin-top: 0;
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+      box-shadow: 0 -2px 12px #f8bbd0;
+      position: relative;
     }
-    .book-nav-btn:active {
-      transform: translateY(-50%) scale(0.95);
+    .hearts-footer {
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+      color: #fff0f5;
+      letter-spacing: 0.15em;
+      animation: heartbeat 1.2s infinite;
     }
-    .book-nav-btn[disabled] {
-      opacity: 0.38;
-      cursor: not-allowed;
+    .footer-heart {
+      color: #fff0f5;
+      font-size: 1.1rem;
     }
-    .book-nav-btn.prev {
-      left: -58px;
-    }
-    .book-nav-btn.next {
-      right: -58px;
-    }
+
+    /* --- RESPONSIVE DESIGN --- */
     @media (max-width: 600px) {
       .book {
         width: 98vw;
@@ -151,113 +248,52 @@
         min-height: 340px;
         max-height: 420px;
       }
-      .book-page, .book-page .book-photo {
+      .book-page, .book-photo {
         padding: 28px 8px 28px 28px;
         width: 90vw;
         min-width: 0;
         font-size: 0.98rem;
       }
-      .book-nav-btn.prev { left: -36px;}
-      .book-nav-btn.next { right: -36px;}
     }
   </style>
 </head>
 <body>
+  <!-- Navigation -->
   <nav class="main-nav">
     <a href="index.html">Home</a>
-    <a href="about-girlfriend.html">About Girlfriend</a>
-    <a href="about-me.html">About Me</a>
+    <a href="about-girlfriend.html" class="active">About My Girlfriend</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html">Contact</a>
   </nav>
-  <main>
-    <div class="book-wrapper">
-      <button class="book-nav-btn prev" id="prevBtn">&#8592;</button>
-      <div class="book">
-        <div class="book-spine"></div>
-        <!-- PAGE 1 -->
-        <div class="book-page active">
-          <div class="book-hearts">&#10084;&#65039; Welcome to Our Love Story Book &#10084;&#65039;</div>
-          <img src="assets/images/gf1.jpg" alt="Your Girlfriend" class="book-photo">
-          <h2>How We Met</h2>
-          <div class="book-text">It all started with a smile that changed my world. From that moment, every day has felt like a new adventure.</div>
-          <span class="book-pagenum">1</span>
+
+  <!-- Book Section -->
+  <div class="book-wrapper">
+    <div class="book">
+      <div class="book-spine"></div>
+      <!-- Layered pages for book realism -->
+      <div class="book-page layer2"></div>
+      <div class="book-page layer1"></div>
+      <div class="book-page content">
+        <div class="book-hearts">💖</div>
+        <h2>Welcome to Our Love Story Book</h2>
+        <img src="your-girlfriend-photo.jpg" alt="Your Girlfriend" class="book-photo" />
+        <div class="book-text">
+          <strong>How We Met</strong><br>
+          It all started with a smile that changed my world.<br>
+          From that moment, every day has felt like a new adventure.
         </div>
-        <!-- PAGE 2 -->
-        <div class="book-page">
-          <div class="book-hearts">&#10084;&#65039;</div>
-          <img src="assets/images/gf2.jpg" alt="Fun Together" class="book-photo">
-          <h2>Why I Love Her</h2>
-          <div class="book-text">Her kindness, her laughter, her beautiful heart. She inspires me to be my best self every day.</div>
-          <span class="book-pagenum">2</span>
-        </div>
-        <!-- PAGE 3 -->
-        <div class="book-page">
-          <div class="book-hearts">&#10084;&#65039;</div>
-          <img src="assets/images/gf3.jpg" alt="Adventure" class="book-photo">
-          <h2>Favorite Memories</h2>
-          <div class="book-text">From days at the beach, to late-night talks, to every little moment in between. I cherish them all.</div>
-          <span class="book-pagenum">3</span>
-        </div>
-        <!-- PAGE 4 -->
-        <div class="book-page">
-          <div class="book-hearts">&#10084;&#65039;</div>
-          <img src="assets/images/gf4.jpg" alt="Smiling" class="book-photo">
-          <h2>Our Future</h2>
-          <div class="book-text">With her, each tomorrow is brighter than the last. I can't wait for all that's yet to come, together.</div>
-          <span class="book-pagenum">4</span>
-        </div>
+        <div class="book-pagenum">1</div>
       </div>
-      <button class="book-nav-btn next" id="nextBtn">&#8594;</button>
     </div>
-  </main>
+  </div>
+
+  <!-- Footer -->
   <footer>
-    <div class="hearts-footer">&#10084;&#65039; &#10084;&#65039; &#10084;&#65039;</div>
-    <p>&copy; 2025 Your Name. Made with <span class="footer-heart">&#10084;&#65039;</span> for my girlfriend.</p>
+    <div class="hearts-footer">❤ ❤ ❤</div>
+    <div>
+      &copy; 2025 Your Name. All Rights Reserved.
+      <span class="footer-heart">❤</span>
+    </div>
   </footer>
-  <script>
-    // Book flipping logic
-    const pages = document.querySelectorAll('.book-page');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    let currentPage = 0;
-    function updateBook() {
-      pages.forEach((page, idx) => {
-        page.classList.remove('active', 'flipped');
-        if (idx < currentPage) page.classList.add('flipped');
-        if (idx === currentPage) page.classList.add('active');
-      });
-      prevBtn.disabled = currentPage === 0;
-      nextBtn.disabled = currentPage === pages.length - 1;
-    }
-    prevBtn.addEventListener('click', () => {
-      if (currentPage > 0) {
-        currentPage -= 1;
-        updateBook();
-      }
-    });
-    nextBtn.addEventListener('click', () => {
-      if (currentPage < pages.length - 1) {
-        currentPage += 1;
-        updateBook();
-      }
-    });
-    // Optional: allow left/right arrow keys
-    document.addEventListener('keydown', e => {
-      if (e.key === "ArrowRight") nextBtn.click();
-      if (e.key === "ArrowLeft") prevBtn.click();
-    });
-    // For touch devices: swipe to flip
-    let touchStartX = null;
-    document.querySelector('.book').addEventListener('touchstart', e => {
-      if (e.touches.length === 1) touchStartX = e.touches[0].clientX;
-    });
-    document.querySelector('.book').addEventListener('touchend', e => {
-      if (touchStartX !== null) {
-        let dx = e.changedTouches[0].clientX - touchStartX;
-        if (dx > 40) prevBtn.click();
-        else if (dx < -40) nextBtn.click();
-        touchStartX = null;
-      }
-    });
-  </script>
 </body>
 </html>
