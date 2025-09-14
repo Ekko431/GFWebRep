@@ -269,6 +269,51 @@ body {
   color: #a22e4b;
   font-size: 1.03rem;
 }
+
+/* --- HOW WE MET SECTION (IMPROVED) --- */
+.how-we-met {
+  background: #fff0f6;
+  padding: 64px 0;
+}
+.how-we-met-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 64px;
+  justify-content: center;
+}
+.how-we-met-text {
+  flex: 1 1 380px;
+  min-width: 320px;
+}
+.how-we-met-photo-wrap {
+  flex: 0 0 320px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.how-we-met-photo {
+  width: 260px;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 50% 50% 50% 50%/60% 60% 40% 40%;
+  box-shadow: 0 8px 32px #f8bbd0, 0 0 0 10px #fff0f6;
+  background: #fff;
+  border: 5px solid #fff;
+  display: block;
+}
+@media (max-width: 900px) {
+  .how-we-met-content {
+    flex-direction: column;
+    gap: 32px;
+    text-align: center;
+  }
+  .how-we-met-text {
+    min-width: 0;
+  }
+}
 @media (max-width: 950px) {
   .gallery-flex {
     flex-direction: column;
