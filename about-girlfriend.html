@@ -34,9 +34,10 @@
     .heart-anim {
       position: absolute;
       font-size: 2.1rem;
-      opacity: 0.28;
+      opacity: 0.13;
       animation: floatHeart 9s linear infinite;
       color: var(--main-pink);
+      filter: blur(0.2px);
     }
     .heart-anim:nth-child(1) { left: 12%; animation-delay: 0s; }
     .heart-anim:nth-child(2) { left: 37%; font-size:2.8rem; animation-delay: 2s; }
@@ -44,11 +45,11 @@
     .heart-anim:nth-child(4) { left: 80%; font-size:2.3rem; animation-delay: 1.5s; }
     .heart-anim:nth-child(5) { left: 25%; font-size:1.8rem; animation-delay: 3.5s; }
     @keyframes floatHeart {
-      0% { top: 105vh; opacity: 0.18; }
-      8% { opacity: 0.25; transform: translateX(-10px) scale(1.1);}
-      40% { opacity: 0.35; }
-      60% { opacity: 0.25; }
-      100% { top: -10vh; opacity: 0.1; transform: translateX(20px) scale(0.9);}
+      0% { top: 105vh; opacity: 0.10; }
+      8% { opacity: 0.17; transform: translateX(-10px) scale(1.1);}
+      40% { opacity: 0.19; }
+      60% { opacity: 0.12; }
+      100% { top: -10vh; opacity: 0.06; transform: translateX(20px) scale(0.9);}
     }
     .main-nav {
       background: #fff;
@@ -99,50 +100,54 @@
       align-items: center;
       min-height: 80vh;
       justify-content: center;
+      padding: 20px 0;
     }
     .flip-book {
       background: var(--book-bg);
       border-radius: 20px;
-      box-shadow: 0 10px 40px var(--book-shadow), 0 0 0 10px #fff;
-      width: 370px;
-      max-width: 94vw;
-      height: 430px;
-      perspective: 1600px;
+      box-shadow: 0 6px 24px 5px #f8bbd0cc;
+      width: 390px;
+      max-width: 98vw;
+      min-width: 250px;
+      height: auto;
       position: relative;
       margin: 40px 0 30px 0;
       transition: box-shadow 0.3s;
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: visible;
     }
     .book-pages-container {
       width: 100%;
-      height: 100%;
+      min-height: 420px;
       position: relative;
-      overflow: hidden;
+      overflow: visible;
       display: flex;
       align-items: stretch;
       justify-content: center;
     }
     .book-page {
       width: 100%;
-      height: 100%;
+      min-height: 420px;
       background: #fff;
       border-radius: 20px;
-      box-shadow: 0 6px 26px #f8bbd089;
+      box-shadow: 0 6px 18px #f8bbd089;
       position: absolute;
       top: 0; left: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 38px 28px 25px 28px;
+      padding: 38px 22px 30px 22px;
       font-family: 'Montserrat', Arial, sans-serif;
       text-align: center;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.6s cubic-bezier(.55,1.5,.56,1);
       z-index: 1;
+      box-sizing: border-box;
+      overflow: visible;
     }
     .book-page.active {
       opacity: 1;
@@ -178,6 +183,8 @@
       box-shadow: 0 4px 18px #f8bbd0;
       border-radius: 50%;
       animation: popIn 1.2s;
+      display: block;
+      box-sizing: border-box;
     }
     @keyframes popIn {
       0% { transform: scale(0.7); opacity: 0;}
@@ -189,6 +196,7 @@
       font-size: 1.4rem;
       margin: 18px 0 9px 0;
       letter-spacing: 1px;
+      font-weight: 700;
     }
     .book-text {
       color: #a22e4b;
@@ -197,6 +205,15 @@
       margin-bottom: 10px;
       margin-top: 7px;
       text-align: center;
+      font-weight: 400;
+      word-break: break-word;
+    }
+    .book-text strong {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 1.13rem;
+      font-weight: 700;
+      color: #b91345;
     }
     .book-pagenum {
       font-size: 1rem;
@@ -212,7 +229,7 @@
       display: flex;
       justify-content: space-between;
       width: 100%;
-      margin-top: 20px;
+      margin-top: 18px;
       gap: 10px;
     }
     .flip-btn {
@@ -267,7 +284,8 @@
     }
     @media (max-width: 600px) {
       .main-nav { gap: 10px; font-size: 0.97rem; padding:12px 0 10px 0;}
-      .flip-book { width: 99vw; max-width: 99vw; min-width: 0; height: 78vw; min-height: 340px; max-height: 420px;}
+      .flip-book { width: 99vw; max-width: 99vw; min-width: 0; }
+      .book-pages-container { min-height: 340px; }
       .book-page, .book-photo { padding: 12px 3vw; font-size: 0.98rem;}
       .book-page h2 { font-size: 1.1rem;}
       .flip-btn { font-size:1rem;}
@@ -297,10 +315,10 @@
         <section class="book-page active">
           <div class="book-hearts">❤️💖❤️</div>
           <h2>How We Met</h2>
-          <img src="assets/images/your-girlfriend-photo.jpg" alt="Your Girlfriend" class="book-photo" />
+          <img src="https://placehold.co/130x120?text=Photo" alt="Your Girlfriend" class="book-photo" />
           <div class="book-text">
             <strong>It all started with a smile that changed my world.</strong>
-            <br>From that moment, every day has felt like a new adventure.<br>
+            From that moment, every day has felt like a new adventure.<br>
             <br>
             You brought color, laughter, and meaning into my life. I’m endlessly grateful for you.
           </div>
