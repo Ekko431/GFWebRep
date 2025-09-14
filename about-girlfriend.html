@@ -4,158 +4,157 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>About My Girlfriend – Our Love Story Book</title>
-  <!-- All-in-one CSS: navigation, book, heart, and footer styles -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --main-pink: #d72660;
+      --light-pink: #ffb6c1;
+      --bg-gradient: linear-gradient(135deg, #ffe0ec 0%, #fff5f8 100%);
+      --book-bg: #fff0f6;
+      --book-shadow: #f8bbd0;
+      --text-dark: #511c29;
+    }
+    html, body {
+      height: 100%;
+    }
     body {
       margin: 0;
       font-family: 'Montserrat', Arial, sans-serif;
-      background: linear-gradient(135deg, #ffe0ec 0%, #fff5f8 100%);
-      color: #511c29;
+      background: var(--bg-gradient);
+      color: var(--text-dark);
       min-height: 100vh;
       overflow-x: hidden;
+      position: relative;
     }
-
-    /* --- NAVIGATION --- */
+    /* Animated floating hearts background */
+    .hearts-bg {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .heart-anim {
+      position: absolute;
+      font-size: 2.1rem;
+      opacity: 0.28;
+      animation: floatHeart 9s linear infinite;
+      color: var(--main-pink);
+    }
+    .heart-anim:nth-child(1) { left: 12%; animation-delay: 0s; }
+    .heart-anim:nth-child(2) { left: 37%; font-size:2.8rem; animation-delay: 2s; }
+    .heart-anim:nth-child(3) { left: 65%; font-size:1.7rem; animation-delay: 4s; }
+    .heart-anim:nth-child(4) { left: 80%; font-size:2.3rem; animation-delay: 1.5s; }
+    .heart-anim:nth-child(5) { left: 25%; font-size:1.8rem; animation-delay: 3.5s; }
+    @keyframes floatHeart {
+      0% { top: 105vh; opacity: 0.18; }
+      8% { opacity: 0.25; transform: translateX(-10px) scale(1.1);}
+      40% { opacity: 0.35; }
+      60% { opacity: 0.25; }
+      100% { top: -10vh; opacity: 0.1; transform: translateX(20px) scale(0.9);}
+    }
+    /* NAVIGATION */
     .main-nav {
       background: #fff;
-      box-shadow: 0 2px 8px #f8bbd0;
+      box-shadow: 0 2px 8px var(--book-shadow);
       display: flex;
       justify-content: center;
-      padding: 12px 0;
+      align-items: center;
+      padding: 16px 0 12px 0;
       position: sticky;
       top: 0;
-      z-index: 5;
+      z-index: 10;
       border-bottom-left-radius: 24px;
       border-bottom-right-radius: 24px;
+      gap: 30px;
     }
     .main-nav a {
-      margin: 0 22px;
-      color: #d72660;
+      color: var(--main-pink);
       text-decoration: none;
       font-weight: 700;
-      font-size: 1.07rem;
-      transition: color 0.2s;
+      font-size: 1.1rem;
       letter-spacing: 0.03em;
       position: relative;
+      transition: color 0.2s;
+      padding: 5px 10px;
     }
     .main-nav a:after {
       content: "";
       display: block;
       width: 0;
       height: 3px;
-      background: linear-gradient(90deg, #d72660 60%, #ffb6c1 100%);
+      background: linear-gradient(90deg, var(--main-pink) 60%, var(--light-pink) 100%);
       transition: width 0.25s;
       border-radius: 2px;
       margin: 0 auto;
     }
-    .main-nav a:hover:after,
-    .main-nav a:focus:after {
+    .main-nav a:hover:after, .main-nav a.active:after {
       width: 100%;
     }
-    .main-nav a:hover {
-      color: #b91345;
-    }
-    .main-nav a.active {
+    .main-nav a:hover, .main-nav a.active {
       color: #b91345;
       text-decoration: underline;
     }
 
-    /* --- BOOK PAGE (About Girlfriend) --- */
-    .book-wrapper {
+    /* BOOK FLIP CARD */
+    .center-content {
+      position: relative;
+      z-index: 2;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
       min-height: 80vh;
-      margin-top: 40px;
-      margin-bottom: 60px;
+      justify-content: center;
     }
-    .book {
+    .flip-book {
+      background: var(--book-bg);
+      border-radius: 20px;
+      box-shadow: 0 10px 40px var(--book-shadow), 0 0 0 10px #fff;
+      width: 370px;
+      max-width: 94vw;
+      height: 430px;
+      perspective: 1600px;
       position: relative;
-      width: 420px;
-      height: 520px;
-      perspective: 2000px;
-      box-shadow: 0 12px 40px #f8bbd0, 0 0 0 12px #fff;
-      border-radius: 16px;
-      background: #fff0f6;
+      margin: 40px 0 30px 0;
+      transition: box-shadow 0.3s;
     }
-    .book-spine {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 24px;
+    .flip-inner {
+      width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, #d72660 70%, #ffb6c1 100%);
-      border-top-left-radius: 16px;
-      border-bottom-left-radius: 16px;
-      box-shadow: 2px 0 8px #f8bbd0;
-      z-index: 10;
+      transition: transform 0.7s cubic-bezier(.55,1.5,.56,1);
+      transform-style: preserve-3d;
+      position: relative;
+    }
+    .flip-book.flipped .flip-inner {
+      transform: rotateY(180deg);
     }
     .book-page {
       width: 100%;
       height: 100%;
-      position: absolute;
-      left: 0; top: 0;
       background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 2px 18px #f8bbd0;
-      overflow: hidden;
-      z-index: 1;
-      padding: 60px 48px 60px 64px;
+      border-radius: 20px;
+      box-shadow: 0 6px 26px #f8bbd089;
+      position: absolute;
+      top: 0; left: 0;
+      backface-visibility: hidden;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      padding: 38px 28px 25px 28px;
       font-family: 'Montserrat', Arial, sans-serif;
-      transition: box-shadow 0.3s;
-    }
-    /* Layered page effects for book realism */
-    .book-page.layer1 {
-      left: 10px;
-      top: 12px;
-      background: #fff6fa;
-      z-index: 0;
-      opacity: 0.7;
-      filter: blur(0.5px);
-      box-shadow: 0 8px 24px #f8bbd0;
-    }
-    .book-page.layer2 {
-      left: 20px;
-      top: 22px;
-      background: #ffeeef;
-      z-index: 0;
-      opacity: 0.45;
-      filter: blur(0.7px);
-      box-shadow: 0 12px 36px #f8bbd0;
-    }
-    .book-page.content {
-      z-index: 2;
-      background: #fff;
-      box-shadow: 0 8px 28px #e9407265, 0 0 0 2px #fff;
-      position: relative;
-    }
-    /* Book shadow for more realism */
-    .book::after {
-      content: "";
-      position: absolute;
-      left: 25px;
-      bottom: -18px;
-      width: 88%;
-      height: 24px;
-      background: radial-gradient(ellipse at center, #f8bbd0 40%, #fff0f5 100%);
-      z-index: 0;
-      border-radius: 40px;
-      opacity: 0.24;
-      filter: blur(2px);
-      pointer-events: none;
-    }
-
-    .book-hearts {
-      font-size: 2rem;
-      color: #d72660;
       text-align: center;
+    }
+    .book-page.back {
+      transform: rotateY(180deg);
+      background: #fff6fa;
+    }
+    .book-hearts {
+      font-size: 2.3rem;
+      color: var(--main-pink);
       margin-bottom: 10px;
       animation: heartbeat 1.2s infinite;
+      letter-spacing: 0.2em;
     }
     @keyframes heartbeat {
       0%, 100% { transform: scale(1); }
@@ -164,60 +163,68 @@
       60% { transform: scale(1.05); }
       80% { transform: scale(0.93); }
     }
-    .book-page h2 {
-      color: #d72660;
-      font-size: 1.7rem;
-      margin: 18px 0 12px 0;
-      text-align: center;
-      letter-spacing: 1px;
-    }
     .book-photo {
-      margin: 0 auto 18px auto;
-      width: 120px;
-      height: 110px;
+      margin: 0 auto 16px auto;
+      width: 130px;
+      height: 120px;
       object-fit: cover;
-      border: 3px solid #fff;
-      display: block;
+      border: 4px solid #fff;
       background: #fff;
       box-shadow: 0 4px 18px #f8bbd0;
-      /* Heart shape using CSS path if supported */
-      clip-path: path('M60 110 Q0 60 30 30 Q60 0 90 30 Q120 60 60 110 Z');
+      border-radius: 50%;
+      animation: popIn 1.2s;
     }
-    /* Fallback for browsers that don't support path() */
-    @supports not (clip-path: path('')) {
-      .book-photo {
-        clip-path: polygon(
-          50% 80%,
-          0% 40%,
-          20% 10%,
-          50% 25%,
-          80% 10%,
-          100% 40%
-        );
-      }
+    @keyframes popIn {
+      0% { transform: scale(0.7); opacity: 0;}
+      70% { transform: scale(1.09);}
+      100% { transform: scale(1); opacity: 1;}
+    }
+    .book-page h2 {
+      color: var(--main-pink);
+      font-size: 1.4rem;
+      margin: 18px 0 9px 0;
+      letter-spacing: 1px;
     }
     .book-text {
       color: #a22e4b;
-      font-size: 1.07rem;
-      text-align: center;
+      font-size: 1.09rem;
       line-height: 1.7;
-      margin-bottom: 8px;
-      margin-top: 6px;
+      margin-bottom: 10px;
+      margin-top: 7px;
+      text-align: center;
     }
     .book-pagenum {
-      position: absolute;
       font-size: 1rem;
       color: #f8bbd0;
-      bottom: 20px;
+      position: absolute;
+      bottom: 13px;
       left: 50%;
       transform: translateX(-50%);
-      letter-spacing: 0.15em;
+      letter-spacing: 0.12em;
       font-family: monospace;
     }
-
-    /* --- FOOTER --- */
+    .flip-btn {
+      margin-top: 17px;
+      background: linear-gradient(90deg, var(--main-pink) 70%, var(--light-pink) 100%);
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      padding: 8px 28px;
+      font-size: 1.04rem;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #f8bbd0;
+      transition: background 0.2s, transform 0.18s;
+      outline: none;
+    }
+    .flip-btn:hover, .flip-btn:focus {
+      background: linear-gradient(90deg, #c2185b 70%, #ffb6c1 100%);
+      transform: translateY(-2px) scale(1.04);
+    }
+    /* FOOTER */
     footer {
-      background: linear-gradient(90deg, #d72660 70%, #ffb6c1 100%);
+      background: linear-gradient(90deg, var(--main-pink) 70%, var(--light-pink) 100%);
       color: #fff;
       text-align: center;
       padding: 24px 8px 14px 8px;
@@ -228,6 +235,7 @@
       border-top-right-radius: 24px;
       box-shadow: 0 -2px 12px #f8bbd0;
       position: relative;
+      z-index: 2;
     }
     .hearts-footer {
       font-size: 1.6rem;
@@ -240,55 +248,68 @@
       color: #fff0f5;
       font-size: 1.1rem;
     }
-
-    /* --- RESPONSIVE DESIGN --- */
+    /* Responsive */
     @media (max-width: 600px) {
-      .book {
-        width: 98vw;
-        min-width: 0;
-        height: 75vw;
-        min-height: 340px;
-        max-height: 420px;
-      }
-      .book-page, .book-photo {
-        padding: 28px 8px 28px 28px;
-        width: 90vw;
-        min-width: 0;
-        font-size: 0.98rem;
-      }
+      .main-nav { gap: 10px; font-size: 0.97rem; padding:12px 0 10px 0;}
+      .flip-book { width: 99vw; max-width: 99vw; min-width: 0; height: 78vw; min-height: 340px; max-height: 420px;}
+      .book-page, .book-photo { padding: 12px 3vw; font-size: 0.98rem;}
+      .book-page h2 { font-size: 1.1rem;}
+      .flip-btn { padding: 8px 10vw; font-size:1rem;}
     }
   </style>
 </head>
 <body>
+  <!-- Animated background hearts -->
+  <div class="hearts-bg" aria-hidden="true">
+    <span class="heart-anim">❤️</span>
+    <span class="heart-anim">💖</span>
+    <span class="heart-anim">💕</span>
+    <span class="heart-anim">💗</span>
+    <span class="heart-anim">💓</span>
+  </div>
   <!-- Navigation -->
   <nav class="main-nav">
-  <a href="index.html">Home</a>
-  <a href="about-girlfriend.html">About Girlfriend</a>
-  <a href="about-me.html">About Me</a>
-</nav>
-
-  <!-- Book Section -->
-  <div class="book-wrapper">
-    <div class="book">
-      <div class="book-spine"></div>
-      <!-- Layered pages for book realism -->
-      <div class="book-page layer2"></div>
-      <div class="book-page layer1"></div>
-      <div class="book-page content">
-        <div class="book-hearts">💖</div>
-        <h2>Welcome to Our Love Story Book</h2>
-        <img src="your-girlfriend-photo.jpg" alt="Your Girlfriend" class="book-photo" />
-        <div class="book-text">
-          <strong>How We Met</strong><br>
-          It all started with a smile that changed my world.<br>
-          From that moment, every day has felt like a new adventure.
-        </div>
-        <div class="book-pagenum">1</div>
+    <a href="index.html">Home</a>
+    <a href="about-girlfriend.html" class="active">About Girlfriend</a>
+    <a href="about-me.html">About Me</a>
+  </nav>
+  <main class="center-content">
+    <!-- Flip Book Card -->
+    <div class="flip-book" id="flipBook">
+      <div class="flip-inner">
+        <!-- PAGE 1: HOW WE MET -->
+        <section class="book-page front">
+          <div class="book-hearts">❤️💖❤️</div>
+          <h2>How We Met</h2>
+          <img src="assets/images/your-girlfriend-photo.jpg" alt="Your Girlfriend" class="book-photo" />
+          <div class="book-text">
+            <strong>It all started with a smile that changed my world.</strong>
+            <br>From that moment, every day has felt like a new adventure.<br>
+            <br>
+            You brought color, laughter, and meaning into my life. I’m endlessly grateful for you.
+          </div>
+          <button class="flip-btn" aria-label="See fun facts about her" onclick="flipBook()">Fun Facts &rarr;</button>
+          <div class="book-pagenum">1</div>
+        </section>
+        <!-- PAGE 2: FUN FACTS -->
+        <section class="book-page back">
+          <div class="book-hearts">💓💕💓</div>
+          <h2>Fun Facts About Her</h2>
+          <div class="book-text">
+            <ul style="list-style:none; padding:0; margin:0; font-size:1.06rem;">
+              <li>✨ Loves <b>sunsets</b> and <b>starry nights</b></li>
+              <li>🎶 Sings to every song in the car</li>
+              <li>🍫 Can’t resist chocolate!</li>
+              <li>🌷 Most caring & supportive person I know</li>
+              <li>👑 My queen, my best friend</li>
+            </ul>
+          </div>
+          <button class="flip-btn" aria-label="Go back" onclick="flipBook()">&#8592; Our Story</button>
+          <div class="book-pagenum">2</div>
+        </section>
       </div>
     </div>
-  </div>
-
-  <!-- Footer -->
+  </main>
   <footer>
     <div class="hearts-footer">❤ ❤ ❤</div>
     <div>
@@ -296,5 +317,11 @@
       <span class="footer-heart">❤</span>
     </div>
   </footer>
+  <script>
+    // Book flip logic
+    function flipBook() {
+      document.getElementById('flipBook').classList.toggle('flipped');
+    }
+  </script>
 </body>
 </html>
