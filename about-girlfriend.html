@@ -14,9 +14,7 @@
       --book-shadow: #f8bbd0;
       --text-dark: #511c29;
     }
-    html, body {
-      height: 100%;
-    }
+    html, body { height: 100%; }
     body {
       margin: 0;
       font-family: 'Montserrat', Arial, sans-serif;
@@ -26,7 +24,6 @@
       overflow-x: hidden;
       position: relative;
     }
-    /* Animated floating hearts background */
     .hearts-bg {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
@@ -53,7 +50,6 @@
       60% { opacity: 0.25; }
       100% { top: -10vh; opacity: 0.1; transform: translateX(20px) scale(0.9);}
     }
-    /* NAVIGATION */
     .main-nav {
       background: #fff;
       box-shadow: 0 2px 8px var(--book-shadow);
@@ -95,8 +91,6 @@
       color: #b91345;
       text-decoration: underline;
     }
-
-    /* BOOK FLIP CARD */
     .center-content {
       position: relative;
       z-index: 2;
@@ -117,16 +111,18 @@
       position: relative;
       margin: 40px 0 30px 0;
       transition: box-shadow 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .flip-inner {
+    .book-pages-container {
       width: 100%;
       height: 100%;
-      transition: transform 0.7s cubic-bezier(.55,1.5,.56,1);
-      transform-style: preserve-3d;
       position: relative;
-    }
-    .flip-book.flipped .flip-inner {
-      transform: rotateY(180deg);
+      overflow: hidden;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
     }
     .book-page {
       width: 100%;
@@ -136,7 +132,6 @@
       box-shadow: 0 6px 26px #f8bbd089;
       position: absolute;
       top: 0; left: 0;
-      backface-visibility: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -144,10 +139,20 @@
       padding: 38px 28px 25px 28px;
       font-family: 'Montserrat', Arial, sans-serif;
       text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s cubic-bezier(.55,1.5,.56,1);
+      z-index: 1;
     }
-    .book-page.back {
-      transform: rotateY(180deg);
-      background: #fff6fa;
+    .book-page.active {
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 2;
+      animation: pageIn 0.7s;
+    }
+    @keyframes pageIn {
+      0% { opacity: 0; transform: scale(0.93) rotateY(7deg);}
+      100% { opacity: 1; transform: scale(1) rotateY(0);}
     }
     .book-hearts {
       font-size: 2.3rem;
@@ -203,13 +208,20 @@
       letter-spacing: 0.12em;
       font-family: monospace;
     }
+    .flip-btns {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 20px;
+      gap: 10px;
+    }
     .flip-btn {
-      margin-top: 17px;
+      flex: 1;
       background: linear-gradient(90deg, var(--main-pink) 70%, var(--light-pink) 100%);
       color: #fff;
       border: none;
       border-radius: 30px;
-      padding: 8px 28px;
+      padding: 8px 0;
       font-size: 1.04rem;
       font-family: 'Montserrat', Arial, sans-serif;
       font-weight: 700;
@@ -217,12 +229,17 @@
       box-shadow: 0 2px 8px #f8bbd0;
       transition: background 0.2s, transform 0.18s;
       outline: none;
+      min-width: 100px;
+    }
+    .flip-btn:disabled {
+      background: #f8bbd0;
+      opacity: 0.5;
+      cursor: not-allowed;
     }
     .flip-btn:hover, .flip-btn:focus {
       background: linear-gradient(90deg, #c2185b 70%, #ffb6c1 100%);
       transform: translateY(-2px) scale(1.04);
     }
-    /* FOOTER */
     footer {
       background: linear-gradient(90deg, var(--main-pink) 70%, var(--light-pink) 100%);
       color: #fff;
@@ -248,13 +265,12 @@
       color: #fff0f5;
       font-size: 1.1rem;
     }
-    /* Responsive */
     @media (max-width: 600px) {
       .main-nav { gap: 10px; font-size: 0.97rem; padding:12px 0 10px 0;}
       .flip-book { width: 99vw; max-width: 99vw; min-width: 0; height: 78vw; min-height: 340px; max-height: 420px;}
       .book-page, .book-photo { padding: 12px 3vw; font-size: 0.98rem;}
       .book-page h2 { font-size: 1.1rem;}
-      .flip-btn { padding: 8px 10vw; font-size:1rem;}
+      .flip-btn { font-size:1rem;}
     }
   </style>
 </head>
@@ -275,10 +291,10 @@
   </nav>
   <main class="center-content">
     <!-- Flip Book Card -->
-    <div class="flip-book" id="flipBook">
-      <div class="flip-inner">
+    <div class="flip-book">
+      <div class="book-pages-container" id="bookPages">
         <!-- PAGE 1: HOW WE MET -->
-        <section class="book-page front">
+        <section class="book-page active">
           <div class="book-hearts">❤️💖❤️</div>
           <h2>How We Met</h2>
           <img src="assets/images/your-girlfriend-photo.jpg" alt="Your Girlfriend" class="book-photo" />
@@ -288,11 +304,14 @@
             <br>
             You brought color, laughter, and meaning into my life. I’m endlessly grateful for you.
           </div>
-          <button class="flip-btn" aria-label="See fun facts about her" onclick="flipBook()">Fun Facts &rarr;</button>
+          <div class="flip-btns">
+            <button class="flip-btn" disabled>&larr; Back</button>
+            <button class="flip-btn" onclick="flipPage(1)">Next &rarr;</button>
+          </div>
           <div class="book-pagenum">1</div>
         </section>
         <!-- PAGE 2: FUN FACTS -->
-        <section class="book-page back">
+        <section class="book-page">
           <div class="book-hearts">💓💕💓</div>
           <h2>Fun Facts About Her</h2>
           <div class="book-text">
@@ -304,8 +323,49 @@
               <li>👑 My queen, my best friend</li>
             </ul>
           </div>
-          <button class="flip-btn" aria-label="Go back" onclick="flipBook()">&#8592; Our Story</button>
+          <div class="flip-btns">
+            <button class="flip-btn" onclick="flipPage(0)">&larr; Back</button>
+            <button class="flip-btn" onclick="flipPage(2)">Next &rarr;</button>
+          </div>
           <div class="book-pagenum">2</div>
+        </section>
+        <!-- PAGE 3: HER STRENGTHS -->
+        <section class="book-page">
+          <div class="book-hearts">💪🌸💪</div>
+          <h2>Her Strengths</h2>
+          <div class="book-text">
+            <ul style="list-style:none; padding:0; margin:0; font-size:1.06rem;">
+              <li>🌟 Incredibly compassionate and empathetic</li>
+              <li>🧠 Super smart and always curious</li>
+              <li>😂 Makes everyone around her laugh</li>
+              <li>💪 Never gives up, even when things are hard</li>
+              <li>💖 Fiercely loyal and protective</li>
+            </ul>
+          </div>
+          <div class="flip-btns">
+            <button class="flip-btn" onclick="flipPage(1)">&larr; Back</button>
+            <button class="flip-btn" onclick="flipPage(3)">Next &rarr;</button>
+          </div>
+          <div class="book-pagenum">3</div>
+        </section>
+        <!-- PAGE 4: HER WEAKNESSES -->
+        <section class="book-page">
+          <div class="book-hearts">😳🍦😳</div>
+          <h2>Her Weaknesses</h2>
+          <div class="book-text">
+            <ul style="list-style:none; padding:0; margin:0; font-size:1.06rem;">
+              <li>🍦 Ice cream (especially at midnight!)</li>
+              <li>😅 Can’t say no to cute puppies</li>
+              <li>🥱 Needs her naps (or she’s grumpy!)</li>
+              <li>😳 Blushes easily when complimented</li>
+              <li>🛒 “Just one more” when shopping 😆</li>
+            </ul>
+          </div>
+          <div class="flip-btns">
+            <button class="flip-btn" onclick="flipPage(2)">&larr; Back</button>
+            <button class="flip-btn" disabled>Last Page</button>
+          </div>
+          <div class="book-pagenum">4</div>
         </section>
       </div>
     </div>
@@ -318,9 +378,16 @@
     </div>
   </footer>
   <script>
-    // Book flip logic
-    function flipBook() {
-      document.getElementById('flipBook').classList.toggle('flipped');
+    // Multi-page book logic
+    const pages = document.querySelectorAll('.book-page');
+    function flipPage(idx) {
+      pages.forEach((page, i) => {
+        if (i === idx) {
+          page.classList.add('active');
+        } else {
+          page.classList.remove('active');
+        }
+      });
     }
   </script>
 </body>
