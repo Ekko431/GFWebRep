@@ -87,19 +87,19 @@
       </div>
     </section>
 
- <section class="how-we-met">
-  <div class="how-we-met-content">
-    <div class="how-we-met-text">
-      <h2>The day we meet</h2>
-      <p>It all started with those beautiful blue eyes that changed my world.<br>
-        From that moment, every day has felt like a dream.</p>
-      <a href="about-girlfriend.html" class="cta-btn">About Me</a>
-    </div>
-    <div class="how-we-met-photo-wrap">
-      <img src="assets/images/photous.jpg" alt="Us Together" class="how-we-met-photo" />
-    </div>
-  </div>
-</section>
+    <section class="how-we-met">
+      <div class="how-we-met-content">
+        <div class="how-we-met-text">
+          <h2>The day we meet</h2>
+          <p>It all started with those beautiful blue eyes that changed my world.<br>
+            From that moment, every day has felt like a dream.</p>
+          <a href="about-girlfriend.html" class="cta-btn">About Me</a>
+        </div>
+        <div class="how-we-met-photo-wrap">
+          <img src="assets/images/photous.jpg" alt="Us Together" class="how-we-met-photo" />
+        </div>
+      </div>
+    </section>
 
     <section class="gallery-section">
       <div class="section-title">Our Memories <span style="font-size:1.2em;">&#10084;&#65039;</span></div>
@@ -121,7 +121,13 @@
                 <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#f8bbd0"/>
               </filter>
             </defs>
-            <image href="assets/images/photo1.jpg" width="200" height="180" clip-path="url(#heart-shape1)" preserveAspectRatio="xMidYMid slice"/>
+            <!-- Adjust y="0" and height="180" for default centering.
+                 If your subject is too high/low, tweak y and height. -->
+            <image href="assets/images/photo1.jpg"
+              x="0" y="0"
+              width="200" height="180"
+              clip-path="url(#heart-shape1)"
+              preserveAspectRatio="xMidYMid slice"/>
             <path d="M100 170
               Q30 110 30 60
               Q30 20 70 20
@@ -153,7 +159,12 @@
                 <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#f8bbd0"/>
               </filter>
             </defs>
-            <image href="assets/images/photo2.jpg" width="200" height="180" clip-path="url(#heart-shape2)" preserveAspectRatio="xMidYMid slice"/>
+            <!-- Example: Move image up by 20px and increase height for better placement -->
+            <image href="assets/images/photo2.jpg"
+              x="0" y="-20"
+              width="200" height="200"
+              clip-path="url(#heart-shape2)"
+              preserveAspectRatio="xMidYMid slice"/>
             <path d="M100 170
               Q30 110 30 60
               Q30 20 70 20
@@ -185,7 +196,11 @@
                 <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#f8bbd0"/>
               </filter>
             </defs>
-            <image href="assets/images/photo3.jpg" width="200" height="180" clip-path="url(#heart-shape3)" preserveAspectRatio="xMidYMid slice"/>
+            <image href="assets/images/photo3.jpg"
+              x="0" y="0"
+              width="200" height="180"
+              clip-path="url(#heart-shape3)"
+              preserveAspectRatio="xMidYMid slice"/>
             <path d="M100 170
               Q30 110 30 60
               Q30 20 70 20
